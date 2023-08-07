@@ -47,40 +47,52 @@ const Explore = ({ dataLabel, submission }: Props) => {
 
   return (
     <>
-      <form>
-        <label>
-          Yes
-          <input
-            type="radio"
-            name="option"
-            value="Yes"
-            onChange={handleOptionChange}
-          />
-        </label>
-        <label>
-          No
-          <input
-            type="radio"
-            name="option"
-            value="No"
-            onChange={handleOptionChange}
-          />
-        </label>
+      <form id="explore-form-radio">
+          <label className="option-label">
+            Yes
+            <input
+              type="radio"
+              name="option"
+              value="Yes"
+              onChange={handleOptionChange}
+            />
+          </label>
+          <label className="option-label">
+            No
+            <input
+              type="radio"
+              name="option"
+              value="No"
+              onChange={handleOptionChange}
+            />
+          </label>
       </form>
 
       {selectedChoice ? (
-        <div className="adventure-options">
-          <form onSubmit={handleSubmit(() => submission(explore))}>
-            {adventureOptions.map((option) => (
-              <label key={option}>
-                {option}
-                <input type="checkbox" name={option} onChange={handleCheck} />
-              </label>
-            ))}
-            <button className="btn btn-primary" type="submit"></button>
+          <form
+            id="explore-form-check"
+            onSubmit={handleSubmit(() => submission(explore))}
+          >
+            <div id="explore-check-options">
+              {adventureOptions.map((option) => (
+                <label className="option-label p-3" key={option}>
+                  {option}
+                  <input type="checkbox" name={option} onChange={handleCheck} />
+                </label>
+              ))}
+            </div>
+            <button className="btn btn-primary mt-4" type="submit">
+              Submit
+            </button>
           </form>
-        </div>
-      ) : <button className="btn btn-primary" onClick={() => submission({[dataLabel]: "No"})}>Next</button>}
+      ) : (
+        <button
+          className="btn btn-primary mt-4"
+          onClick={() => submission({ [dataLabel]: "No" })}
+        >
+          Submit
+        </button>
+      )}
     </>
   );
 };

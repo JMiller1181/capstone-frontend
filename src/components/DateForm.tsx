@@ -35,8 +35,8 @@ const DateForm = ({submission}:Props) => {
     }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
+    <form className="form-section" onSubmit={handleSubmit}>
+      <div className="date-container">
         <label>Select Start Date:</label>
         <DatePicker
           selected={startDate}
@@ -47,7 +47,7 @@ const DateForm = ({submission}:Props) => {
           endDate={endDate}
         />
       </div>
-      <div>
+      <div className="date-container">
         <label>Select End Date:</label>
         <DatePicker
           selected={endDate}
@@ -59,7 +59,7 @@ const DateForm = ({submission}:Props) => {
           minDate={startDate}
         />
       </div>
-      <button type="submit">Submit</button>
+      <button className="btn btn-primary mt-5" type="submit" disabled={!datesSelected} >Submit</button>
     </form>
   );};
 

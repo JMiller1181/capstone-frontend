@@ -7,7 +7,7 @@ interface Props {
 }
 
 const GroupSize = ({ dataLabel, submission }: Props) => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState: {errors} } = useForm();
   const [people, setPeople] = useState({});
 
   const handleChange = (data: FieldValues) => {
@@ -15,14 +15,14 @@ const GroupSize = ({ dataLabel, submission }: Props) => {
   };
   return (
     <div>
-      <form onSubmit={handleSubmit(submission)} onChange={handleChange}>
-        <label>{dataLabel}</label>
-        <input
+      <form className="form-section" onSubmit={handleSubmit(submission)} onChange={handleChange}>
+        <input id="group-size"
           {...register(dataLabel, { required: true })}
           min={1}
           type="number"
         ></input>
-        <button className="btn btn-primary" type="submit"></button>
+        {errors[dataLabel]?.type === "required" && <p>Must select a group size</p>}
+        <button className="btn btn-primary mt-4" type="submit">Submit</button>
       </form>
     </div>
   );
