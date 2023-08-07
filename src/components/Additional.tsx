@@ -9,10 +9,9 @@ const Additional = ({ dataLabel, submission }: Props) => {
     const { register, handleSubmit } = useForm();
     return (
       <div>
-        <form onSubmit={handleSubmit(submission)}>
-          <label>{dataLabel}</label>
-          <input {...register(dataLabel)}></input>
-          <button className="btn btn-primary" type="submit"></button>
+        <form className="form-section" onSubmit={handleSubmit(submission)}>
+          <input {...register(dataLabel)} id="location"></input>
+          <button className="btn btn-primary mt-4" type="submit">Submit</button>
         </form>
       </div>
     );

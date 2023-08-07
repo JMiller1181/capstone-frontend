@@ -1,3 +1,76 @@
-#card-container {
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100vh;
+}
+.card {
+    padding: 5vw;
+    display: flex;
+    align-items: center;
+}
+.question {
+    padding: 1vw;
+    text-align: center;
+}
+.form-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.error-message {
+    text-align: center;
+    color: red;
+}
+.check-options {
+display: flex;
+flex-wrap: wrap;
+justify-content: space-around;
+}
+.option-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#location {
+    text-align: center;
+}
+#group-size {
+    text-align: end;
+}
+.date-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1vh;
+}
+#explore-form-radio {
+    display: flex;
+    justify-content: space-between;
+    width: 25%;
+}
+#explore-form-check {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+}
+#explore-check-options {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+#user-check-box {
+    display: flex;
+    flex-direction: column;
+    max-height: 100vh;
+    align-items: center;
+}
+#user-check {
+    display: flex;
+}
+#button-container {
+display: flex;
+justify-content: space-around;
+width: 100%;
 }

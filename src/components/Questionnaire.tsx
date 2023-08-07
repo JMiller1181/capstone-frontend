@@ -3,24 +3,67 @@ import { useState } from "react";
 import Location from "./Location";
 import DateForm from "./DateForm";
 import GroupSize from "./GroupSize";
-import Activities from "./Activities";
-import Lodging from "./Lodging";
-import Events from "./Events";
 import Explore from "./Explore";
-import Transport from "./Transport";
-import Food from "./Food";
-import Outdoors from "./Outdoors";
-import Shopping from "./Shopping";
-import Trips from "./Trips";
-import Nightlife from "./Nightlife";
 import Additional from "./Additional";
+import Checkboxes from "./Checkboxes";
+import Radio from "./Radio";
+import UserCheck from "./UserCheck";
 
 interface Props {
-  dataLabels: string[];
-  questions: string[];
   onSubmit: (data: object) => void;
 }
-const Questionnaire = ({ questions, onSubmit, dataLabels }: Props) => {
+const Questionnaire = ({ onSubmit }: Props) => {
+  const dataLabels = [
+    "Location",
+    "Dates",
+    "People",
+    "Activities",
+    "Lodging",
+    "Events",
+    "Explore",
+    "Transport",
+    "Food",
+    "Outdoors",
+    "Shopping",
+    "Trips",
+    "Nightlife",
+    "Additional",
+  ];
+  const questions = [
+    "What is your destination for the vacation?",
+    "What are the dates of your vacation?",
+    "Are you traveling alone or with others? If with others, how many people will be in your group?",
+    "What type of activities do you enjoy?",
+    "Are you looking for luxury resorts, mid-range hotels, budget-friendly options, or perhaps something unique like vacation rentals or boutique hotels?",
+    "Are you interested in attending any cultural events, festivals, or shows while there?",
+    "Are you looking to relax on the beach, explore nature, visit cultural sites, or engage in adventurous activities?",
+    "What is your preferred mode of transportation during the vacation?",
+    "Do you enjoy trying local cuisines and dining at different restaurants, or do you prefer to cook your meals?",
+    "Are you interested in any adventurous or outdoor activities?",
+    "Would you like to spend some time shopping for local products or souvenirs?",
+    "Are you interested in taking any day trips to nearby attractions or locations outside of your main destination?",
+    "Would you like to explore the nightlife scene to you during this vacation?",
+    "Is there anything specific you'd like to include in your vacation that we haven't covered yet?",
+  ];
+
+  const foodOptions = ["dining at different restaurants", "cook your meals"];
+
+  const activityOptions = ["1", "2", "3"];
+
+  const lodgingOptions = [
+    "luxury resorts",
+    "mid-range hotels",
+    "budget-friendly",
+    "vacation rentals/boutique hotels",
+  ];
+
+  const transportOptions = [
+    "rent a car",
+    "public transportation",
+    "ride share services",
+    "personal vehicle",
+  ];
+
   //useState to track state objects
   const [cardIndex, setCardIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState({});
@@ -45,37 +88,55 @@ const Questionnaire = ({ questions, onSubmit, dataLabels }: Props) => {
     <Location dataLabel={dataLabels[cardIndex]} submission={collectAnswer} />,
     <DateForm submission={collectAnswer} />,
     <GroupSize dataLabel={dataLabels[cardIndex]} submission={collectAnswer} />,
-    <Activities dataLabel={dataLabels[cardIndex]} submission={collectAnswer} />,
-    <Lodging dataLabel={dataLabels[cardIndex]} submission={collectAnswer} />,
-    <Events dataLabel={dataLabels[cardIndex]} submission={collectAnswer} />,
+    <Checkboxes
+      options={activityOptions}
+      dataLabel={dataLabels[cardIndex]}
+      submission={collectAnswer}
+    />,
+    <Checkboxes
+      options={lodgingOptions}
+      dataLabel={dataLabels[cardIndex]}
+      submission={collectAnswer}
+    />,
+    <Radio dataLabel={dataLabels[cardIndex]} submission={collectAnswer} />,
     <Explore dataLabel={dataLabels[cardIndex]} submission={collectAnswer} />,
-    <Transport dataLabel={dataLabels[cardIndex]} submission={collectAnswer} />,
-    <Food dataLabel={dataLabels[cardIndex]} submission={collectAnswer} />,
-    <Outdoors dataLabel={dataLabels[cardIndex]} submission={collectAnswer} />,
-    <Shopping dataLabel={dataLabels[cardIndex]} submission={collectAnswer} />,
-    <Trips dataLabel={dataLabels[cardIndex]} submission={collectAnswer} />,
-    <Nightlife dataLabel={dataLabels[cardIndex]} submission={collectAnswer} />,
+    <Checkboxes
+      options={transportOptions}
+      dataLabel={dataLabels[cardIndex]}
+      submission={collectAnswer}
+    />,
+    <Checkboxes
+      options={foodOptions}
+      dataLabel={dataLabels[cardIndex]}
+      submission={collectAnswer}
+    />,
+    <Radio dataLabel={dataLabels[cardIndex]} submission={collectAnswer} />,
+    <Radio dataLabel={dataLabels[cardIndex]} submission={collectAnswer} />,
+    <Radio dataLabel={dataLabels[cardIndex]} submission={collectAnswer} />,
+    <Radio dataLabel={dataLabels[cardIndex]} submission={collectAnswer} />,
     <Additional dataLabel={dataLabels[cardIndex]} submission={collectAnswer} />,
   ];
 
   //Conditional rendering of components and Final page after all questions have been answered
   return (
-    <div>
-      <div>{questions[cardIndex]}</div>
+    <div className="card">
+      <div className="question">{questions[cardIndex]}</div>
       {components[cardIndex]}
       {cardIndex === questions.length && (
-        <div>
+        <div id="user-check-box">
           <h3>Does everything here look alright?</h3>
-          <p></p>
-          <button
-            className="btn btn-primary"
-            onClick={() => submitData(userAnswers)}
-          >
-            Yes! Create my itinerary!
-          </button>
-          <button className="btn btn-danger" onClick={() => setCardIndex(0)}>
-            No! Take me back!
-          </button>
+          <UserCheck questions={questions} userAnswers={userAnswers} />
+          <div id="button-container">
+            <button
+              className="btn btn-primary"
+              onClick={() => submitData(userAnswers)}
+            >
+              Yes! Create my itinerary!
+            </button>
+            <button className="btn btn-danger" onClick={() => setCardIndex(0)}>
+              No! Take me back!
+            </button>
+          </div>
         </div>
       )}
     </div>
