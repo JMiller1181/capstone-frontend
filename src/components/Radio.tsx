@@ -55,12 +55,20 @@ const Radio = ({ dataLabel, submission }: Props) => {
           />
         </label>
       </div>
-      {!optionSelected && (
-        <p className="error-message">Please select an option</p>
-      )}
-      <button className="btn btn-primary mt-4" type="submit" disabled={!optionSelected}>
+      <button
+        className="btn btn-primary mt-4"
+        type="submit"
+        disabled={!optionSelected}
+      >
         Submit
       </button>
+        <p
+          className={`error-message ${
+            !optionSelected ? "visible" : "invisible"
+          }`}
+        >
+          Please select an option
+        </p>
     </form>
   );
 };

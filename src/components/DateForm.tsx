@@ -59,7 +59,7 @@ const DateForm = ({submission}:Props) => {
           minDate={startDate}
         />
       </div>
-      <button className="btn btn-primary mt-5" type="submit" disabled={!datesSelected} >Submit</button>
+      <button className="btn btn-primary mt-3" type="submit" disabled={!datesSelected} >Submit</button>
     </form>
   );};
 

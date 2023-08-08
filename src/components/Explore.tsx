@@ -18,6 +18,7 @@ const Explore = ({ dataLabel, submission }: Props) => {
   const [explore, setExplore] = useState({});
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [selectedChoice, setSelectedChoice] = useState(false);
+  const [radioActive, setRadioActive] = useState(false);
 
   useEffect(() => {
     setExplore({ [dataLabel]: selectedOptions });
@@ -40,14 +41,17 @@ const Explore = ({ dataLabel, submission }: Props) => {
   const handleOptionChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.value === "Yes") {
       setSelectedChoice(true);
+      setRadioActive(true)
     } else {
       setSelectedChoice(false);
+      setRadioActive(true);
     }
   };
 
   return (
     <>
-      <form id="explore-form-radio">
+      <form className="form-section">
+        <div className=" check-options">
           <label className="option-label">
             Yes
             <input
@@ -66,32 +70,47 @@ const Explore = ({ dataLabel, submission }: Props) => {
               onChange={handleOptionChange}
             />
           </label>
+        </div>
+        {!selectedChoice ? (
+          <button
+            className="btn btn-primary mt-4"
+            onClick={() => {
+              submission({ [dataLabel]: "No" });
+            }}
+            disabled={!radioActive}
+          >
+            Submit
+          </button>
+        ) : (
+          <br></br>
+        )}
       </form>
 
       {selectedChoice ? (
+        <div>
           <form
-            id="explore-form-check"
+            className="form-section"
             onSubmit={handleSubmit(() => submission(explore))}
           >
-            <div id="explore-check-options">
+            <div className="check-options">
               {adventureOptions.map((option) => (
-                <label className="option-label p-3" key={option}>
+                <label className="option-label p-2" key={option}>
                   {option}
                   <input type="checkbox" name={option} onChange={handleCheck} />
                 </label>
               ))}
             </div>
-            <button className="btn btn-primary mt-4" type="submit">
+            <button
+              className="btn btn-primary mt-4"
+              type="submit"
+              disabled={selectedOptions.length === 0}
+            >
               Submit
             </button>
           </form>
+        </div>
       ) : (
-        <button
-          className="btn btn-primary mt-4"
-          onClick={() => submission({ [dataLabel]: "No" })}
-        >
-          Submit
-        </button>
+        <br></br>
       )}
     </>
   );

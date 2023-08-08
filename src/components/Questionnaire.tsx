@@ -30,11 +30,11 @@ const Questionnaire = ({ onSubmit }: Props) => {
     "Additional",
   ];
   const questions = [
-    "What is your destination for the vacation?",
+    "What is your destination for the vacation? Please put both city and state.",
     "What are the dates of your vacation?",
-    "Are you traveling alone or with others? If with others, how many people will be in your group?",
-    "What type of activities do you enjoy?",
-    "Are you looking for luxury resorts, mid-range hotels, budget-friendly options, or perhaps something unique like vacation rentals or boutique hotels?",
+    "How many people other than you will be in your group?",
+    "What type of activities are you interested in?",
+    "Are you looking for luxury resorts, mid-range hotels, budget-friendly options, or perhaps something unique like vacation rentals?",
     "Are you interested in attending any cultural events, festivals, or shows while there?",
     "Are you looking to relax on the beach, explore nature, visit cultural sites, or engage in adventurous activities?",
     "What is your preferred mode of transportation during the vacation?",
@@ -43,25 +43,25 @@ const Questionnaire = ({ onSubmit }: Props) => {
     "Would you like to spend some time shopping for local products or souvenirs?",
     "Are you interested in taking any day trips to nearby attractions or locations outside of your main destination?",
     "Would you like to explore the nightlife scene to you during this vacation?",
-    "Is there anything specific you'd like to include in your vacation that we haven't covered yet?",
+    "Is there anything specific you'd like to include in your vacation that we haven't covered yet? Please be detailed.",
   ];
 
-  const foodOptions = ["dining at different restaurants", "cook your meals"];
+  const foodOptions = ["Dining at restaurants", "Cook your meals"];
 
-  const activityOptions = ["1", "2", "3"];
+  const activityOptions = ["Educational", "Relaxation", "Arts & Crafts", "Tourist Hotspots"];
 
   const lodgingOptions = [
-    "luxury resorts",
-    "mid-range hotels",
-    "budget-friendly",
-    "vacation rentals/boutique hotels",
+    "Luxury resorts",
+    "Mid-range hotels",
+    "Budget-friendly",
+    "Vacation rentals",
   ];
 
   const transportOptions = [
-    "rent a car",
-    "public transportation",
-    "ride share services",
-    "personal vehicle",
+    "Rent a car",
+    "Public transportation",
+    "Ride share services",
+    "Personal vehicle",
   ];
 
   //useState to track state objects

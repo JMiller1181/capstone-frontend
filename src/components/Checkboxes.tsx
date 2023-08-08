@@ -32,7 +32,8 @@ const Checkboxes = ({ dataLabel, submission, options }: Props) => {
   };
   return (
     <div>
-      <form className="form-section"
+      <form
+        className="form-section"
         onSubmit={handleSubmit(() => {
           submission(choice);
           setSelectedOptions([]);
@@ -46,7 +47,6 @@ const Checkboxes = ({ dataLabel, submission, options }: Props) => {
             </label>
           ))}
         </div>
-        {selectedOptions.length > 0 || <p className="error-message">Must select at least one option</p>}
         <button
           className="btn btn-primary mt-4"
           type="submit"
@@ -54,6 +54,9 @@ const Checkboxes = ({ dataLabel, submission, options }: Props) => {
         >
           Submit
         </button>
+          <p className={`error-message ${selectedOptions.length > 0 ? "invisible":"visible"}`}>
+            Must select at least one option
+          </p>
       </form>
     </div>
   );
