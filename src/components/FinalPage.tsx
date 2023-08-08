@@ -1,11 +1,11 @@
 interface Props {
-  itenerary: string;
+  itinerary: string;
   onClick: () => void;
 }
-const FinalPage = ({ itenerary, onClick }: Props) => {
+const FinalPage = ({ itinerary, onClick }: Props) => {
   return (
     <>
-      <div>{itenerary}</div>
+      <div>{itinerary}</div>
       <button className="btn" onClick={onClick}>go home</button>
     </>
   );
