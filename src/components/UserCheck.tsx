@@ -8,13 +8,8 @@ const UserCheck = ({userAnswers, questions}:Props) => {
   return (
     <div id="user-check">
       <div id="questions">
-        {questions.map((question) => (
-          <p>{question}</p>
-        ))}
-      </div>
-      <div id="answers">
-        {answers.map((answer, index) => (
-          <p key={index}>{JSON.stringify(answer)}</p>
+        {questions.map((question, index) => (
+          <div><h5 id={index.toString()} key={index}>{question}</h5><p>{JSON.stringify(answers[index])}</p></div>
         ))}
       </div>
     </div>
