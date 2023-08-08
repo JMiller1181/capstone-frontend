@@ -1,0 +1,42 @@
+prompt 1
+I am thrilled to be going on vacation! My chosen destination is ${userData.Location}. 
+I have planned a duration of stay ${userData.Dates} days of vacation, from ${userData.Start} to ${userData.End}. 
+I'll be traveling with ${userData.People} friends.
+
+prompt 2 
+During this vacation, our main goal is to ${userData.Activities}. 
+We prefer staying in ${userData.Lodging}. 
+
+prompt 3
+We are excited to explore ${userData.Location} and immerse ourselves in cultural events, festivals, and shows.  
+
+prompt 4
+For relaxation, I would love to spend some time to beach, explore nature, visit cultural sites, or engage in adventurous activities. 
+
+prompt 5 
+As for transportation we will be getting around by the following: ${userData.Transport}
+We're open to ${userData.Food}, we also enjoy cooking some of our meals.
+
+prompt 6
+For adventure, I would like to spend some time to  ${userData.Outdoor}.
+
+prompt 7
+We would love to spend some time to ${userData.Shopping}. 
+
+prompt 8
+We are interested in taking day trips to nearby sites outside ${userData.Location}.
+
+prompt 9
+These are also some things I would like to do: ${userData.Additional}
+
+promptX
+Start by giving me two paragraphs about the ${userData.Location}. 
+With all this in mind, please create a day-by-day itinerary labeled with dates and activities. 
+Each day should include breakfast, lunch, and dinner, as well as 2-3 daytime activities. 
+Please include the times to eat in the itinerary for breakfast, lunch, and dinner. 
+At the end of the itinerary, include a list of 25 local cuisines and dishes that we should try.
+We're flexible about the itinerary and would like a mix of pre-planned activities and some free time to explore on our own. 
+Additionally, if there are any exciting festivals or events happening during our stay, we'd love to attend. 
+
+Overall, we're looking forward to an unforgettable vacation filled with fun, relaxation, and amazing experiences in ${userData.Location}.
+

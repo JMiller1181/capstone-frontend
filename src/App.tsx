@@ -14,7 +14,7 @@ function App() {
 
   const configuration = new Configuration({
     organization: "org-Ln6nrybVYLHIb0codP6HfeRu",
-    apiKey: "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",
+    apiKey: "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",
   });
   const openai = new OpenAIApi(configuration);
 
@@ -26,7 +26,7 @@ function App() {
     "Activities",
     "Lodging",
     "Events",
-    "Explore",
+    "Relaxation",
     "Transport",
     "Food",
     "Outdoors",
@@ -36,25 +36,54 @@ function App() {
     "Additional",
   ];
 
-        const createPrompt = (userData: {
-          Location?: any;
-          Dates?: any;
-          Start?: any;
-          End?: any;
-          People?: any;
-          Lodging?: any;
-          Activities?: any;
-          Explore?: any;
-          Food?: any;
-          Outdoors?: any;
-          Shopping?: any;
-        }) => {
-          const prompt = `I am thrilled to be going on vacation! My chosen destination is ${userData.Location}. I have planned a duration of stay ${userData.Dates} days of vacation, from ${userData.Start} to ${userData.End}, and I'll be traveling with ${userData.People} friends. We prefer staying in ${userData.Lodging}. During this vacation, our main goal is to have ${userData.Activities}. We are excited to explore ${userData.Location} and immerse ourselves in ${userData.Explore}. We're open to ${userData.Food}, we also enjoy cooking some of our meals. Please include the times to eat itinerary for simply breakfast, lunch, and dinner. At the end of the itinerary include a list of 25 local cuisines and dishes that we should try. For relaxation, we'd love to spend some time ${userData.Outdoors}. For adventure, we would love to spend some time to ${userData.Shopping}. We're flexible about the itinerary and would like a mix of pre-planned activities and some free time to explore on our own. Additionally, if there are any exciting festivals or events happening during our stay, we'd love to attend. Overall, we're looking forward to an unforgettable vacation filled with fun, relaxation, and amazing experiences in ${userData.Location}.`;
-          console.log(prompt);
-          return prompt;
-        };
+  const createPrompt = (userData: any) => {
+    const promptParts = [
+      `I am thrilled to be going on vacation! My chosen destination is ${userData.Location}. 
+      I have planned a duration of stay ${userData.Dates} days of vacation, from ${userData.Start} to ${userData.End}. 
+      I'll be traveling with ${userData.People} friends.`,
+      `During this vacation, our main goal is to have ${userData.Activities}. 
+      We prefer staying in ${userData.Lodging}.`,
+    ];
 
-  const handleFormSubmission = async (formData: object) => {
+    if (userData.Explore === "Yes") {
+      promptParts.push(`We are excited to explore ${userData.Location} and immerse ourselves in cultural events, festivals, and shows.`);
+    }
+
+    if (userData.Relaxation === "Yes") {
+      promptParts.push(`For relaxation, we'd love to spend some time ${userData.Relaxation}.`);
+    }
+
+    promptParts.push(`As for transportation, we will be getting around by the following: ${userData.Transport}.`);
+
+    if (userData.Outdoors === "Yes") {
+      promptParts.push(`For adventure, we would love to spend some time to ${userData.Outdoors}.`);
+    }
+
+    if (userData.Shopping === "Yes") {
+      promptParts.push(`We would love to spend some time to ${userData.Shopping}.`);
+    }
+
+    if (userData.Trips === "Yes") {
+      promptParts.push(`We are interested in taking day trips to nearby sites outside ${userData.Location}.`);
+    }
+
+    if (userData.Additional && userData.Additional.trim() !== "") {      
+      promptParts.push(`These are also some things I would like to do: ${userData.Additional}.`);
+    }
+
+    promptParts.push(`Start by giving me two paragraphs about the ${userData.Location}.
+    With all this in mind, please create a day-by-day itinerary labeled with dates and activities. 
+    Each day should include breakfast, lunch, and dinner, as well as 2-3 daytime activities.
+    Please include the times to eat in the itinerary for breakfast, lunch, and dinner.
+    At the end of the itinerary, include a list of 25 local cuisines and dishes that we should try.
+    We're flexible about the itinerary and would like a mix of pre-planned activities and some free time to explore on our own.
+    Additionally, if there are any exciting festivals or events happening during our stay, we'd love to attend.
+    Overall, we're looking forward to an unforgettable vacation filled with fun, relaxation, and amazing experiences in ${userData.Location}.`);
+
+    return promptParts.join("\n\n");
+  };
+
+  const handleFormSubmission = async (formData: any) => {
     try {
       setLoading(true);
       setError(null);
@@ -64,10 +93,11 @@ function App() {
 
       const completion = await openai.createChatCompletion({
         model: "gpt-3.5-turbo",
-        messages: [{ role: "assistant", content: prompt }],
+        messages: [{ role: "system", content: prompt }],
+        
       });
 
-      const response = JSON.stringify(completion.data.choices[0].message);
+      const response = completion.data.choices[0].message.content;
       console.log(response);
 
       setItinerary(response);
@@ -91,7 +121,7 @@ function App() {
         </div>
       ) : (
         <FinalPage
-          itinerary={itinerary} // Fixed typo in "itenerary" to "itinerary"
+          itinerary={itinerary}
           onClick={() => console.log(userData)}
         />
       )}
