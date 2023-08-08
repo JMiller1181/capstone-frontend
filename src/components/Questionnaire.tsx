@@ -48,7 +48,12 @@ const Questionnaire = ({ onSubmit }: Props) => {
 
   const foodOptions = ["Dining at restaurants", "Cook your meals"];
 
-  const activityOptions = ["Educational", "Relaxation", "Arts & Crafts", "Tourist Hotspots"];
+  const activityOptions = [
+    "Educational",
+    "Relaxation",
+    "Arts & Crafts",
+    "Tourist Hotspots",
+  ];
 
   const lodgingOptions = [
     "Luxury resorts",
@@ -86,7 +91,7 @@ const Questionnaire = ({ onSubmit }: Props) => {
   // array of components to be used
   const components = [
     <Location dataLabel={dataLabels[cardIndex]} submission={collectAnswer} />,
-    <DateForm submission={collectAnswer} />,
+    <DateForm dataLabel={dataLabels[cardIndex]} submission={collectAnswer} />,
     <GroupSize dataLabel={dataLabels[cardIndex]} submission={collectAnswer} />,
     <Checkboxes
       options={activityOptions}
@@ -119,10 +124,15 @@ const Questionnaire = ({ onSubmit }: Props) => {
 
   //Conditional rendering of components and Final page after all questions have been answered
   return (
-    <div className="card">
-      <div className="question">{questions[cardIndex]}</div>
-      {components[cardIndex]}
-      {cardIndex === questions.length && (
+    <>
+      {cardIndex < questions.length ? (
+        <div className="card">
+          <div className="question">
+            <h4>{questions[cardIndex]}</h4>
+          </div>
+          {components[cardIndex]}
+        </div>
+      ) : (
         <div id="user-check-box">
           <h3>Does everything here look alright?</h3>
           <UserCheck questions={questions} userAnswers={userAnswers} />
@@ -139,7 +149,7 @@ const Questionnaire = ({ onSubmit }: Props) => {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

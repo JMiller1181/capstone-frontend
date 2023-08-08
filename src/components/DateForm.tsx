@@ -4,9 +4,10 @@ import "react-datepicker/dist/react-datepicker.css";
 
 interface Props {
     submission: (data: object) => void;
+    dataLabel: string
 }
 
-const DateForm = ({submission}:Props) => {
+const DateForm = ({dataLabel, submission}:Props) => {
     const [startDate, setStartDate] = useState<Date | null>(null);
     const [endDate, setEndDate] = useState<Date | null>(null);
     const [datesSelected, setDatesSelected] = useState(false);
@@ -28,7 +29,7 @@ const DateForm = ({submission}:Props) => {
     const handleSubmit = (event: FormEvent) => {
         event.preventDefault();
         if(datesSelected) {
-          const dateData = { Start: startDate, End: endDate };
+          const dateData = { [dataLabel]: [startDate?.toDateString(), endDate?.toDateString()] };
           console.log(dateData);
           submission(dateData);
         }

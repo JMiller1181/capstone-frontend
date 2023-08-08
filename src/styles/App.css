@@ -60,6 +60,7 @@ align-items: center;
 }
 #user-check {
     display: flex;
+    text-align: center;
 }
 #button-container {
 display: flex;
