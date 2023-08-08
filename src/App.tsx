@@ -6,13 +6,15 @@ import "./styles/App.css";
 
 function App() {
   const [userData, setUserData] = useState({});
-  const [itinerary, setItinerary] = useState(false);
+  const [itinerary, setItinerary] = useState("");
+  const [hasItinerary, setHasItinerary] = useState(false);
+
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<null | string>(null);
 
   const configuration = new Configuration({
     organization: "org-Ln6nrybVYLHIb0codP6HfeRu",
-    apiKey: "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",
+    apiKey: "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",
   });
   const openai = new OpenAIApi(configuration);
 
@@ -34,35 +36,42 @@ function App() {
     "Additional",
   ];
 
-  const handleFormSubmission = async (formData: any[]) => {
+        const createPrompt = (userData: {
+          Location?: any;
+          Dates?: any;
+          Start?: any;
+          End?: any;
+          People?: any;
+          Lodging?: any;
+          Activities?: any;
+          Explore?: any;
+          Food?: any;
+          Outdoors?: any;
+          Shopping?: any;
+        }) => {
+          const prompt = `I am thrilled to be going on vacation! My chosen destination is ${userData.Location}. I have planned a duration of stay ${userData.Dates} days of vacation, from ${userData.Start} to ${userData.End}, and I'll be traveling with ${userData.People} friends. We prefer staying in ${userData.Lodging}. During this vacation, our main goal is to have ${userData.Activities}. We are excited to explore ${userData.Location} and immerse ourselves in ${userData.Explore}. We're open to ${userData.Food}, we also enjoy cooking some of our meals. Please include the times to eat itinerary for simply breakfast, lunch, and dinner. At the end of the itinerary include a list of 25 local cuisines and dishes that we should try. For relaxation, we'd love to spend some time ${userData.Outdoors}. For adventure, we would love to spend some time to ${userData.Shopping}. We're flexible about the itinerary and would like a mix of pre-planned activities and some free time to explore on our own. Additionally, if there are any exciting festivals or events happening during our stay, we'd love to attend. Overall, we're looking forward to an unforgettable vacation filled with fun, relaxation, and amazing experiences in ${userData.Location}.`;
+          console.log(prompt);
+          return prompt;
+        };
+
+  const handleFormSubmission = async (formData: object) => {
     try {
       setLoading(true);
       setError(null);
- 
-      const updatedUserData = labels.reduce(
-        (acc, label, index) => ({ ...acc, [label]: formData[index] }),
-        {}
-      );
-      
-      setUserData(updatedUserData);
+      setUserData(formData);
 
-      const createPrompt = (userData: { Location?: any; Dates?: any; Start?: any; End?: any; People?: any; Lodging?: any; Activities?: any; Explore?: any; Food?: any; Outdoors?: any; Shopping?: any; }) => {
-        const prompt = `I am thrilled to be going on vacation! My chosen destination is ${userData.Location}. I have planned a duration of stay ${userData.Dates} days of vacation, from ${userData.Start} to ${userData.End}, and I'll be traveling with ${userData.People} friends. We prefer staying in ${userData.Lodging}. During this vacation, our main goal is to have ${userData.Activities}. We are excited to explore ${userData.Location} and immerse ourselves in ${userData.Explore}. We're open to ${userData.Food}, we also enjoy cooking some of our meals. Please include the times to eat itinerary for simply breakfast, lunch, and dinner. At the end of the itinerary include a list of 25 local cuisines and dishes that we should try. For relaxation, we'd love to spend some time ${userData.Outdoors}. For adventure, we would love to spend some time to ${userData.Shopping}. We're flexible about the itinerary and would like a mix of pre-planned activities and some free time to explore on our own. Additionally, if there are any exciting festivals or events happening during our stay, we'd love to attend. Overall, we're looking forward to an unforgettable vacation filled with fun, relaxation, and amazing experiences in ${userData.Location}.`;
-        console.log(prompt)
-        return prompt;
-      };
-
-      const prompt = createPrompt(updatedUserData);
+      const prompt = createPrompt(formData);
 
       const completion = await openai.createChatCompletion({
         model: "gpt-3.5-turbo",
         messages: [{ role: "assistant", content: prompt }],
       });
 
-      const response = completion.data.choices[0].message;
+      const response = JSON.stringify(completion.data.choices[0].message);
       console.log(response);
 
       setItinerary(response);
+      setHasItinerary(true);
       setLoading(false);
     } catch (error) {
       console.error("Error while generating the itinerary:", error);
@@ -73,7 +82,7 @@ function App() {
 
   return (
     <>
-      {!itinerary ? (
+      {!hasItinerary ? (
         <div
           id="card-container"
           className="d-flex justify-content-center align-items-center"
