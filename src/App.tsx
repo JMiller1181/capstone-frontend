@@ -5,7 +5,8 @@ import { Configuration, OpenAIApi } from "openai";
 import "./styles/App.css";
 
 function App() {
-  const [userData, setUserData] = useState({});
+  //This might not be necessary, maybe delete
+  // const [userData, setUserData] = useState({});
   const [itinerary, setItinerary] = useState("");
   const [hasItinerary, setHasItinerary] = useState(false);
 
@@ -17,24 +18,24 @@ function App() {
     apiKey: "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",
   });
   const openai = new OpenAIApi(configuration);
-
-  const labels = [
-    "Location",
-    "Start",
-    "End",
-    "People",
-    "Activities",
-    "Lodging",
-    "Events",
-    "Relaxation",
-    "Transport",
-    "Food",
-    "Outdoors",
-    "Shopping",
-    "Trips",
-    "Nightlife",
-    "Additional",
-  ];
+  //I don't think this is being used, maybe delete
+  // const labels = [
+  //   "Location",
+  //   "Start",
+  //   "End",
+  //   "People",
+  //   "Activities",
+  //   "Lodging",
+  //   "Events",
+  //   "Relaxation",
+  //   "Transport",
+  //   "Food",
+  //   "Outdoors",
+  //   "Shopping",
+  //   "Trips",
+  //   "Nightlife",
+  //   "Additional",
+  // ];
 
   const createPrompt = (userData: any) => {
     const promptParts = [
@@ -87,7 +88,8 @@ function App() {
     try {
       setLoading(true);
       setError(null);
-      setUserData(formData);
+      //This action is actually unecessary I think
+      // setUserData(formData);
 
       const prompt = createPrompt(formData);
 
@@ -122,7 +124,7 @@ function App() {
       ) : (
         <FinalPage
           itinerary={itinerary}
-          onClick={() => console.log(userData)}
+          onClick={() => setHasItinerary(false)}
         />
       )}
     </>

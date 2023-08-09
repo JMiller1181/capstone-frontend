@@ -126,15 +126,16 @@ const Questionnaire = ({ onSubmit }: Props) => {
   return (
     <>
       {cardIndex < questions.length ? (
-        <div className="card">
-          <div className="question">
-            <h4>{questions[cardIndex]}</h4>
+        <div className="background">
+          <div className="card">
+            <div className="question">
+              <h4>{questions[cardIndex]}</h4>
+            </div>
+            {components[cardIndex]}
           </div>
-          {components[cardIndex]}
         </div>
       ) : (
-        <div id="user-check-box">
-          <h3>Does everything here look alright?</h3>
+        <div  id="user-check-box">
           <UserCheck questions={questions} userAnswers={userAnswers} />
           <div id="button-container">
             <button
