@@ -77,8 +77,7 @@ function App() {
     Please include the times to eat in the itinerary for breakfast, lunch, and dinner.
     At the end of the itinerary, include a list of 25 local cuisines and dishes that we should try.
     We're flexible about the itinerary and would like a mix of pre-planned activities and some free time to explore on our own.
-    Additionally, if there are any exciting festivals or events happening during our stay, we'd love to attend.
-    Overall, we're looking forward to an unforgettable vacation filled with fun, relaxation, and amazing experiences in ${userData.Location}.`);
+    Overall, we're looking forward to an unforgettable vacation filled with fun, relaxation, and amazing experiences in ${userData.Location}. `);
 
     return promptParts.join("\n\n");
   };
