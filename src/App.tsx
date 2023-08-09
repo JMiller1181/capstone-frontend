@@ -6,7 +6,7 @@ import "./styles/App.css";
 
 function App() {
   //This might not be necessary, maybe delete
-  // const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState({});
   const [itinerary, setItinerary] = useState("");
   const [hasItinerary, setHasItinerary] = useState(false);
 
@@ -15,27 +15,27 @@ function App() {
 
   const configuration = new Configuration({
     organization: "org-Ln6nrybVYLHIb0codP6HfeRu",
-    apiKey: "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",
+    apiKey: "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",
   });
   const openai = new OpenAIApi(configuration);
   //I don't think this is being used, maybe delete
-  // const labels = [
-  //   "Location",
-  //   "Start",
-  //   "End",
-  //   "People",
-  //   "Activities",
-  //   "Lodging",
-  //   "Events",
-  //   "Relaxation",
-  //   "Transport",
-  //   "Food",
-  //   "Outdoors",
-  //   "Shopping",
-  //   "Trips",
-  //   "Nightlife",
-  //   "Additional",
-  // ];
+  const labels = [
+    "Location",
+    "Start",
+    "End",
+    "People",
+    "Activities",
+    "Lodging",
+    "Events",
+    "Relaxation",
+    "Transport",
+    "Food",
+    "Outdoors",
+    "Shopping",
+    "Trips",
+    "Nightlife",
+    "Additional",
+  ];
 
   const createPrompt = (userData: any) => {
     const promptParts = [
@@ -89,7 +89,7 @@ function App() {
       setLoading(true);
       setError(null);
       //This action is actually unecessary I think
-      // setUserData(formData);
+      setUserData(formData);
 
       const prompt = createPrompt(formData);
 
