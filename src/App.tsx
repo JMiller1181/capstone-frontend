@@ -15,7 +15,7 @@ function App() {
 
   const configuration = new Configuration({
     organization: "org-Ln6nrybVYLHIb0codP6HfeRu",
-    apiKey: "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",
+    apiKey: "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",
   });
   const openai = new OpenAIApi(configuration);
   //I don't think this is being used, maybe delete
