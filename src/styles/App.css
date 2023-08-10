@@ -1,3 +1,5 @@
+import 
+
 body {
     display: flex;
     justify-content: center;
@@ -128,5 +130,13 @@ body {
   
   #go-home-button:hover {
     background-color: #0056b3;
+  }
+
+  .linear{
+    width: 100vw; 
+    height: 100vh;
+    display:flex;
+    align-items: center;
+    justify-content: center;
   }
   

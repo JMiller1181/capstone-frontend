@@ -3,6 +3,7 @@ import FinalPage from "./components/FinalPage";
 import Questionnaire from "./components/Questionnaire";
 import { Configuration, OpenAIApi } from "openai";
 import "./styles/App.css";
+import LinearProgress  from "@mui/material/LinearProgress";
 
 function App() {
   //This might not be necessary, maybe delete
@@ -15,7 +16,7 @@ function App() {
 
   const configuration = new Configuration({
     organization: "org-Ln6nrybVYLHIb0codP6HfeRu",
-    apiKey: "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",
+    apiKey: "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",
   });
   const openai = new OpenAIApi(configuration);
   //I don't think this is being used, maybe delete
@@ -108,13 +109,20 @@ function App() {
 
       setItinerary(response);
       setHasItinerary(true);
-      setLoading(false);
     } catch (error) {
       console.error("Error while generating the itinerary:", error);
       setError("An error occurred while generating the itinerary.");
+    }
+    finally {
       setLoading(false);
     }
   };
+
+  const linear = () =>(
+    <div className="linear">
+      <LinearProgress color="secondary" />
+    </div>
+ )
 
   return (
     <>
@@ -128,7 +136,7 @@ function App() {
       ) : (
         <FinalPage
           itinerary={itinerary}
-          onClick={() => setHasItinerary(false)}
+          onClick={() => setHasItinerary(true)}
         />
       )}
     </>
