@@ -3,7 +3,8 @@ import FinalPage from "./components/FinalPage";
 import Questionnaire from "./components/Questionnaire";
 import { Configuration, OpenAIApi } from "openai";
 import "./styles/App.css";
-import LinearProgress  from "@mui/material/LinearProgress";
+import { LinearProgress } from '@mui/material';
+// import LinearProgress  from "@mui/material/LinearProgress";
 
 function App() {
   //This might not be necessary, maybe delete
@@ -16,7 +17,7 @@ function App() {
 
   const configuration = new Configuration({
     organization: "org-Ln6nrybVYLHIb0codP6HfeRu",
-    apiKey: "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",
+    apiKey: "sk-F0My9SeHEMm2qwSRSFrOT3BlbkFJJ1ONdXMwqOSjmdSM30DXXX",
   });
   const openai = new OpenAIApi(configuration);
   //I don't think this is being used, maybe delete
@@ -76,11 +77,10 @@ function App() {
       promptParts.push(`These are also some things I would like to do: ${userData.Additional}.`);
     }
 
-    promptParts.push(`With all the up to date knowledge that you have up to 2021 I want you to create a itinerary.
-    Start by giving me two paragraphs about the ${userData.Location}.
-    With all this in mind, please create a day-by-day itinerary labeled with dates and activities. 
-    Please include the hour of the day for each meal and actvity. (Very Important!!) 
-    Each day should include breakfast, lunch, and dinner, as well as 2-3 daytime activities.
+    promptParts.push(`With all this in mind and all the up to date knowledge that you have up to 2021 please create a day-by-day itinerary, labeled with dates and activities. 
+    Start by giving me 2 to 3 paragraphs about ${userData.Location}.
+    Include the exact time of the day for each meal and actvity suggested starting between 7am to 10am each day.
+    Each day should include breakfast, lunch, and dinner, as well as 3-4 daytime activities, excluding meals.
     At the end of the itinerary, include a list of 25 local cuisines and dishes that we should try, along with the best places to eat in the area.
     Also list 25 other actvities we can do while in ${userData.Location}.
     We're flexible about the itinerary and would like a mix of pre-planned activities and some free time to explore on our own.
@@ -130,14 +130,20 @@ function App() {
     id="loading"
     className="d-flex justify-content-center align-items-center"
   >
-          <img src='src/loader.jpg' alt="Loading" />
-  </div>
+          <img src='src/loader.jpg' alt="Loading" />       
+  </div>  
 );
 
+// const loadingBar = () => (
+// <div className="d-flex justify-content-center align-items-center">
+// <LinearProgress color="secondary" />
+// <LinearProgress color="success" />
+// </div> 
+// );
 
   return (
     <>
-      { loading ? loadingPic() : !hasItinerary ? (
+      { loading ? (loadingPic()) : !hasItinerary ? (
         <div
           id="card-container"
           className="d-flex justify-content-center align-items-center"
