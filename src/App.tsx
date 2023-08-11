@@ -16,7 +16,7 @@ function App() {
 
   const configuration = new Configuration({
     organization: "org-Ln6nrybVYLHIb0codP6HfeRu",
-    apiKey: "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",
+    apiKey: "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",
   });
   const openai = new OpenAIApi(configuration);
   //I don't think this is being used, maybe delete
@@ -130,14 +130,14 @@ function App() {
     id="loading"
     className="d-flex justify-content-center align-items-center"
   >
-          <img src='loader.jpg' alt="Loading" />
+          <img src='src/loader.jpg' alt="Loading" />
   </div>
 );
 
 
   return (
     <>
-      { loading ? loadingPic : !hasItinerary ? (
+      { loading ? loadingPic() : !hasItinerary ? (
         <div
           id="card-container"
           className="d-flex justify-content-center align-items-center"

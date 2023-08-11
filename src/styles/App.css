@@ -136,7 +136,7 @@ body {
   }
 
   #loading{
-        background-image: url("loader.jpg");
+        background-image: url("src/loader.jpg");
         background-size: cover;
         background-position: center;
         height: 100vh;
