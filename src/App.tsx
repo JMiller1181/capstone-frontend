@@ -61,7 +61,7 @@ function App() {
     }
 
     if (userData.Shopping === "Yes") {
-      promptParts.push(`We would love to spend some time to ${userData.Shopping}.`);
+      promptParts.push(`We would love to spend some time to ${userData.Shopping}. So include any malls or notable shopping areas.`);
     }
 
     if (userData.Trips === "Yes") {
@@ -79,13 +79,13 @@ function App() {
     promptParts.push(`With all the up to date knowledge that you have up to 2021 I want you to create a itinerary.
     Start by giving me two paragraphs about the ${userData.Location}.
     With all this in mind, please create a day-by-day itinerary labeled with dates and activities. 
-    Please include the hour of the day for each meal and actvity. 
+    Please include the hour of the day for each meal and actvity. (Very Important!!) 
     Each day should include breakfast, lunch, and dinner, as well as 2-3 daytime activities.
     At the end of the itinerary, include a list of 25 local cuisines and dishes that we should try, along with the best places to eat in the area.
     Also list 25 other actvities we can do while in ${userData.Location}.
     We're flexible about the itinerary and would like a mix of pre-planned activities and some free time to explore on our own.
-    Additionally, if there are any exciting festivals or events happening during our stay, we'd love to attend.
-    Overall, we're looking forward to an unforgettable vacation filled with fun, relaxation, and amazing experiences in ${userData.Location}.`);
+    Overall, we're looking forward to an unforgettable vacation filled with fun, relaxation, and amazing experiences in ${userData.Location}.
+    `);
 
     return promptParts.join("\n\n");
   };
@@ -118,15 +118,26 @@ function App() {
     }
   };
 
-  const linear = () =>(
-    <div className="linear">
-      <LinearProgress color="secondary" />
-    </div>
- )
+//   const loadingPic = () =>(
+//     <div id="card-container"
+//     className="d-flex justify-content-center align-items-center">
+//           <img src='loader.jpg' alt="Loading" />
+//     </div>
+//  )
+
+ const loadingPic = () => (
+  <div
+    id="loading"
+    className="d-flex justify-content-center align-items-center"
+  >
+          <img src='loader.jpg' alt="Loading" />
+  </div>
+);
+
 
   return (
     <>
-      {!hasItinerary ? (
+      { loading ? loadingPic : !hasItinerary ? (
         <div
           id="card-container"
           className="d-flex justify-content-center align-items-center"
@@ -136,7 +147,7 @@ function App() {
       ) : (
         <FinalPage
           itinerary={itinerary}
-          onClick={() => setHasItinerary(true)}
+          onClick={() => setHasItinerary(false)}
         />
       )}
     </>

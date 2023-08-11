@@ -12,12 +12,32 @@ const FinalPage = ({ itinerary, onClick }: Props) => {
     <div id="final-page">
       <div id="itinerary">
         {paragraphs.map((paragraph, index) => (
-          <p key={index}>{paragraph}</p>
+          <div key={index}>
+            {paragraph.split("\n").map((line, lineIndex) => (
+              <p key={lineIndex}>
+                {line.startsWith("- ") ? (
+                  <span>&bull; {line.substring(2)}</span>
+                ) : (
+                  <span>
+                    <strong>{line}</strong>
+                  </span>
+                )}
+              </p>
+            ))}
+            <hr />
+          </div>
         ))}
       </div>
-      <button id="go-home-button" onClick={onClick}>
-        Back to Home
-      </button>
+      <button
+  id="go-home-button"
+  className="btn btn-primary"
+  onClick={() => {
+    onClick(); 
+    window.location.reload(); 
+  }}
+>
+  Back to Home
+</button>
     </div>
   );
 };

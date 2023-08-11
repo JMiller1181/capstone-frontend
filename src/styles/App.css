@@ -1,5 +1,3 @@
-import 
-
 body {
     display: flex;
     justify-content: center;
@@ -108,13 +106,19 @@ body {
     flex-direction: column;
     align-items: center;
     overflow-y: auto;
-    max-height: 80vh;
+    max-height: 100vh;
     padding: 20px;
+    background-color: rgb(205, 135, 205);
   }
   
   #itinerary {
+    padding-top: 5vh;
     margin-bottom: 20px;
-  }
+    background-color: white;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    border-radius: 1%;
+    box-shadow: 10px 10px 15px 5px black;  }
   
   #itinerary p {
     margin: 0 0 10px;
@@ -132,11 +136,14 @@ body {
     background-color: #0056b3;
   }
 
-  .linear{
-    width: 100vw; 
-    height: 100vh;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-  }
+  #loading{
+        background-image: url("loader.jpg");
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+        width: 100vw;
+        margin: 0;
+        font-family: Arial, sans-serif;
+      }
+  
   
