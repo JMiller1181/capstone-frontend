@@ -30,20 +30,20 @@ const Questionnaire = ({ onSubmit }: Props) => {
     "Additional",
   ];
   const questions = [
-    "What is your destination for the vacation? Please put both city and state.",
-    "What are the dates of your vacation?",
-    "How many people other than you will be in your group?",
-    "What type of activities are you interested in?",
-    "Are you looking for luxury resorts, mid-range hotels, budget-friendly options, or perhaps something unique like vacation rentals?",
-    "Are you interested in attending any cultural events, festivals, or shows while there?",
-    "Are you looking to relax on the beach, explore nature, visit cultural sites, or engage in adventurous activities?",
-    "What is your preferred mode of transportation during the vacation?",
-    "Do you enjoy trying local cuisines and dining at different restaurants, or do you prefer to cook your meals?",
-    "Are you interested in any adventurous or outdoor activities?",
-    "Would you like to spend some time shopping for local products or souvenirs?",
-    "Are you interested in taking any day trips to nearby attractions or locations outside of your main destination?",
-    "Would you like to explore the nightlife scene to you during this vacation?",
-    "Is there anything specific you'd like to include in your vacation that we haven't covered yet? Please be detailed.",
+    "Where are you planning to vacation? Please provide the city and state.",
+    "What are your vacation dates?",
+    "How many people will be in your group?",
+    "What types of activities interest you?",
+    "Do you prefer luxury resorts, mid-range hotels, budget options, or unique accommodations like vacation rentals?",
+    "Are you interested in cultural events, festivals, or shows?",
+    "What's your preferred vacation style: beach relaxation, nature exploration, cultural visits, or adventurous activities?",
+    "How do you plan to get around during your vacation?",
+    "Are you eager to experience local cuisines and dining?",
+    "Do you seek outdoor or adventurous experiences?",
+    "Is shopping for local products or souvenirs important to you?",
+    "Do you want to take day trips to nearby attractions?",
+    "Interested in exploring nightlife options?",
+    "Is there anything specific you'd like to include in your vacation that we haven't covered yet?",
   ];
 
   const foodOptions = ["Dining at restaurants", "Cook your meals"];
@@ -53,7 +53,23 @@ const Questionnaire = ({ onSubmit }: Props) => {
     "Relaxation",
     "Arts & Crafts",
     "Tourist Hotspots",
+    "Sports & Recreation",
+    "Culinary Adventures",
+    "Wildlife Viewing",
+    "Live Music & Concerts",
+    "Historical Sites & Museums",
+    "Outdoor Picnics",
+    "Photography Expeditions",
+    "Water Sports & Boating",
+    "Spa & Wellness Treatments",
+    "Theatre & Performing Arts",
+    "Food Tours & Tastings",
+    "Shopping & Local Markets",
+    "Nature Hikes & Trails",
+    "Cultural Workshops",
+    "Wine & Brewery Tours",
   ];
+  
 
   const lodgingOptions = [
     "Luxury resorts",
