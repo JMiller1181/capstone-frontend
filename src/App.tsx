@@ -17,7 +17,7 @@ function App() {
 
   const configuration = new Configuration({
     organization: "org-Ln6nrybVYLHIb0codP6HfeRu",
-    apiKey: "Your key",
+    apiKey: "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",
   });
   const openai = new OpenAIApi(configuration);
   //I don't think this is being used, maybe delete
@@ -62,7 +62,7 @@ function App() {
     }
 
     if (userData.Shopping === "Yes") {
-      promptParts.push(`We would love to spend some time to ${userData.Shopping}. So include any malls or notable shopping areas.`);
+      promptParts.push(`We would love to spend some time to ${userData.Shopping}. So I would like to see any malls or notable shopping areas.`);
     }
 
     if (userData.Trips === "Yes") {
@@ -77,17 +77,17 @@ function App() {
       promptParts.push(`These are also some things I would like to do: ${userData.Additional}.`);
     }
    
-    return promptParts.join("\n\n");
+    return promptParts.join();
   };
 
-  const systemConfig = [
-    `With all this in mind and all the up to date knowledge that you have up to 2021 you will create a day-by-day itinerary. 
-    Please label each day with dates. Start by giving me 2 to 3 paragraphs about ${userData.Location}.
-    Include the exact time of the day for each meal and actvity suggested starting between 7am to 10am each day. 
-    Each day should include breakfast, lunch, and dinner, as well as 3-4 daytime activities, excluding meals. 
-    At the end of the itinerary, include a list of 25 local cuisines and dishes that we should try, along with the best places to eat in the area. 
-    Also list 25 other actvities we can do while in ${userData.Location}. `
-  ]
+  // const systemConfig: String[] = [
+  //   `With all this in mind and all the up to date knowledge that you have up to 2021 you will create a day-by-day itinerary. 
+  //   Please label each day with dates. Start by giving me 2 to 3 paragraphs about ${userData.Location}.
+  //   Include the exact time of the day for each meal and actvity suggested starting between 7am to 10am each day. 
+  //   Each day should include breakfast, lunch, and dinner, as well as 3-4 daytime activities, excluding meals. 
+  //   At the end of the itinerary, include a list of 25 local cuisines and dishes that we should try, along with the best places to eat in the area. 
+  //   Also list 25 other actvities we can do while in ${userData.Location}. `
+  // ]
 
   const handleFormSubmission = async (formData: any) => {
     try {
@@ -98,11 +98,19 @@ function App() {
       const prompt = createPrompt(formData);
 
       const completion = await openai.createChatCompletion({
-        model: "gpt-3.5-turbo",
+        model: "gpt-3.5-turbo-16k-0613",
         messages: [
-          { role: "system", content: `You are a helpful an expert travel assistant` + systemConfig },
-          {role: "user", content: prompt}
-      ],
+          { role: "system", content: `You are a helpful an expert travel assistant`},
+          {role: "assistant", content: prompt},
+          {role: "user", content: `Start by giving me 2 to 3 paragraphs about the Location.
+          With all this in mind and all the up to date knowledge that you have up to 2021 you will create a day-by-day itinerary. 
+          Label each day with dates. 
+          Include the exact time of the day for each meal and actvity suggested starting between 7am to 10am each day.
+          Each day should include breakfast, lunch, and dinner, as well as 3-4 daytime activities, excluding meals. 
+          At the end of the itinerary, include a list of 10 with the best places to eat in the area. Also list 10 other actvities we can do while in Location. 
+          Review this prompt 5 times over again to make sure you have inluded everything that has been asked for and that each day and time is accounted for in the itinerary.
+          Missing days will result in failure of task.`}
+        ]
         
       });
 
