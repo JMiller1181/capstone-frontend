@@ -16,8 +16,8 @@ function App() {
   const [error, setError] = useState<null | string>(null);
 
   const configuration = new Configuration({
-    organization: "org-Ln6nrybVYLHIb0codP6HfeRu",
-    apiKey: "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",
+    organization: "Your-Org-Key",
+    apiKey: "Your-API-Key",
   });
   const openai = new OpenAIApi(configuration);
   //I don't think this is being used, maybe delete
@@ -42,9 +42,9 @@ function App() {
   const createPrompt = (userData: any) => {
     const promptParts = [
       `I am thrilled to be going on vacation! My chosen destination is ${userData.Location}. 
-      I have planned a duration of stay ${userData.Dates} days of vacation, from ${userData.Start} to ${userData.End}. 
+      I have planned a duration of stay from ${userData.Start} to ${userData.End}  of vacation, 
       I'll be traveling with ${userData.People} friends.`,
-      `During this vacation, our main goal is to do the follow activities:  ${userData.Activities}. 
+      `During this vacation, we are interested in doing some of, but not limited to, the following activities:  ${userData.Activities}. 
       We prefer staying in ${userData.Lodging}.`, `Ways we like to eat are: ${userData.Food}`, 
       `As for transportation, we will be getting around by the following: ${userData.Transport}.`
     ];
@@ -100,17 +100,16 @@ function App() {
       const completion = await openai.createChatCompletion({
         model: "gpt-3.5-turbo-16k-0613",
         messages: [
-          { role: "system", content: `You are a helpful an expert travel assistant`},
           {role: "assistant", content: prompt},
-          {role: "user", content: `Start by giving me 2 to 3 paragraphs about the Location.
-          With all this in mind and all the up to date knowledge that you have up to 2021 you will create a day-by-day itinerary. 
-          Label each day with dates. 
-          Include the exact time of the day for each meal and actvity suggested starting between 7am to 10am each day.
-          Each day should include breakfast, lunch, and dinner, as well as 3-4 daytime activities, excluding meals. 
-          At the end of the itinerary, include a list of 10 with the best places to eat in the area. Also list 10 other actvities we can do while in Location. 
-          Review this prompt 5 times over again to make sure you have inluded everything that has been asked for and that each day and time is accounted for in the itinerary.
-          Missing days will result in failure of task.`}
-        ]
+          { role: "system", content: `You are a helpful an expert travel assistant`},
+          {role: "user", content: `Start by giving me 2 to 3 paragraphs about the destination.
+          With all this in mind and all the up to date knowledge that you have up to 2021 you will create a daily itinerary for each day. 
+          Each day should include breakfast, lunch, and dinner, as well as 1-2 activities. Schedule the activies for Morning, Noon, Afternoon, Evening and Night. 
+          Label each day with dates. Make sure to include each day in the duration of the vacation including travel days.
+          Include the time of the day for each meal and actvity suggested starting between 6:30am to 11am each day.
+          At the end of the itinerary, include a list of 10 with the best places to eat in the area. Also list 10 other actvities we can do while in destination.
+          Review this paragraph over again to make sure you have inluded everything that has been asked for and that each day of the vacation and time is accounted for in the itinerary. 
+        `}]
         
       });
 
